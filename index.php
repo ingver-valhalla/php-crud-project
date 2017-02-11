@@ -15,4 +15,3 @@
   $content = 'tpl_index_content.php';
 
   include 'tpl_main.php';
-?>
