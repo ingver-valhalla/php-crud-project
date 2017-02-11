@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Предприятие</title>
+    <title><?php echo $section ?> | Предприятие</title>
   </head>
   <body>
 
