@@ -1,5 +1,5 @@
-<?php include('auth.php') ?>
 <?php
+  include 'auth_check.php';
   if (session_status() == PHP_SESSION_ACTIVE) {
       header('Location: ./index.php');
       exit;

@@ -6,3 +6,12 @@
     <title>Предприятие</title>
   </head>
   <body>
+
+  <?php
+    include $user_block;
+    include $menu;
+    include $content;
+  ?>
+
+  </body>
+</html>

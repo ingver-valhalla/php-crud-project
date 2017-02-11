@@ -1,22 +1,13 @@
-<?php include('header.php') ?>
+<?php
+  include 'auth_check.php';
 
-  <?php include('user_block.php') ?>
+  $query = 'SELECT * from providers';
+  $result = include 'db_get.php';
 
-  <div class="nav-container">
-    <ul class="navbar">
-      <li><a href="parts.php">Детали</a></li>
-      <li><a href="projects.php">Проекты</a></li>
-      <li><a>Поставщики</a></li>
-      <li><a href="cities.php">Города</a></li>
-      <li><a href="index.php" class="start-page">Главная страница</a></li>
-    </ul>
-  </div>
+  $section = 'Поставщики';
+  $user_block = 'tpl_user_block.php';
+  $menu = 'tpl_menu.php';
+  $content = 'tpl_content.php';
 
-  <div class="content">
-
-    <?php $query = 'SELECT id, name, city_id from providers'; ?>
-    <?php include('query_n_print.php') ?>
-
-  </div>
-
-<?php include('footer.php') ?>
+  include 'tpl_main.php';
+?>

@@ -1,9 +1,4 @@
-<?php include('db_connect.php') ?>
-
-<?php $result = $db->query($query); ?>
-
 <?php if ($result): ?>
-  <?php //var_dump($result); ?>
   <?php if ($result->num_rows): ?>
 
     <table border="1">
@@ -41,5 +36,3 @@
   <p><strong>Ошибка в запросе</strong></p>
 
 <?php endif; ?>
-
-<?php include('db_close.php') ?>
