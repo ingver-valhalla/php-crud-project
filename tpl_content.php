@@ -1,3 +1,4 @@
+<div class="content">
 <?php if ($result): ?>
   <?php if ($result->num_rows): ?>
 
@@ -36,3 +37,4 @@
   <p><strong>Ошибка в запросе</strong></p>
 
 <?php endif; ?>
+</div>

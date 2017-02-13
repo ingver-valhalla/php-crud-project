@@ -6,3 +6,5 @@
     echo 'Текст ошибки error: ' . mysqli_connect_error() . '<br>';
     exit;
   }
+
+  return $db;

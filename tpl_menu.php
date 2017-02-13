@@ -1,4 +1,4 @@
-<div class="nav-container">
+<div class="menu">
   <ul class="navbar">
     <li><a href="parts.php">Детали</a></li>
     <li><a href="projects.php">Проекты</a></li>

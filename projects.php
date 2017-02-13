@@ -1,9 +1,9 @@
 <?php
   include 'auth_check.php';
-  include 'db_connect.php';
 
+  include 'db_connect.php';
   $query = 'SELECT * from projects';
-  $result = include 'db_query_close.php';
+  include 'db_query_close.php';
 
   $section = 'Проекты';
   $user_block = 'tpl_user_block.php';
