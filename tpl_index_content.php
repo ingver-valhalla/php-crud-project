@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content-block">
   <p>Выберете секцию в меню</p>
   <?php if (session_status() == PHP_SESSION_ACTIVE): ?>
     <p>Вы посетили эту страницу <?php echo($_SESSION['times']); ?> раз</p>

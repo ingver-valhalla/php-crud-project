@@ -1,8 +1,8 @@
-<div class="content">
+<div class="content-block">
 <?php if ($result): ?>
   <?php if ($result->num_rows): ?>
 
-    <table border="1">
+    <table class="content">
       <?php $fields = $result->fetch_fields(); ?>
 
       <tr>

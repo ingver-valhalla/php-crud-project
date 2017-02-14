@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $section ?> | Предприятие</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
   </head>
   <body>
 
