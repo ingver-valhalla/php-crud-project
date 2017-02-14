@@ -7,7 +7,6 @@ body {
 body {
   padding: 0;
   margin: 0;
-
   font-family: 'Rubik', Helvetica, sans-serif;
   /*background-color: #2b3835;*/
 }
@@ -64,11 +63,11 @@ body {
 
   padding-top: 10px;
 
-
   background-color: #333;
   /*background-color: #172A3A;*/
   /*border: 1px dotted green;*/
   box-shadow: 9px 10px 3px -3px #999999;
+
 }
 
 .menu ul {
@@ -84,14 +83,50 @@ body {
   padding-left: 20px;
   padding-top: 12px;
   padding-bottom: 12px;
+  width: 260px;
 
   /*border: 1px solid lightblue;*/
   text-decoration: none;
   text-transform: uppercase;
   font-size: 21px;
-	line-height: 21px;
+  line-height: 21px;
   font-weight: bold;
   color: #fff;
+
+  transition: background-color 0.1s;
+}
+
+.menu-item a:hover {
+  background-color: #F4AB00;
+  color: #fff;
+  text-shadow: 0px 0px 4px #1B2B38;
+  width: 270px;
+  transition: background-color 0.3s;
+}
+
+.menu-item a::before {
+  opacity: 0;
+  content: "";
+
+  transition: opacity 0.1s;
+}
+
+.menu-item a:hover::before {
+  opacity: 1;
+  position: relative;
+  content: "";
+  width: 0;
+  height: 0;
+  top: 44px;
+  left: 240px;
+
+  border-top: 10px solid #111;
+  border-left: 0px solid #111;
+  border-right: 10px solid transparent;
+
+  z-index: -1;
+
+  transition: opacity 0.3s;
 }
 
 .menu-item.active a {
@@ -101,41 +136,25 @@ body {
   width: 270px;
 }
 
+.menu-item.active a:hover {
+  cursor: default;
+}
+
 .menu-item.active a::before {
-	position: relative;
+  opacity: 1;
+  position: relative;
   content: "";
   width: 0;
   height: 0;
-	top: 44px;
-	left: 240px;
+  top: 44px;
+  left: 240px;
 
   border-top: 10px solid #111;
   border-left: 0px solid #111;
   border-right: 10px solid transparent;
 
-	z-index: -1;
-}
+  z-index: -1;
 
-.menu-item a:hover {
-  background-color: #F4AB00;
-  color: #fff;
-  text-shadow: 0px 0px 4px #1B2B38;
-  width: 270px;
-}
-
-.menu-item a:hover::before {
-	position: relative;
-  content: "";
-  width: 0;
-  height: 0;
-	top: 44px;
-	left: 240px;
-
-  border-top: 10px solid #111;
-  border-left: 0px solid #111;
-  border-right: 10px solid transparent;
-
-	z-index: -1;
 }
 
 .user-block {
