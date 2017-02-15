@@ -9,7 +9,8 @@
     if (!key_exists('login', $_POST) || $_POST['login'] == '' ||
         !key_exists('password', $_POST) || $_POST['password'] == '') {
 
-        echo '<p>Необходимо заполнить поля формы!</p>';
+        $message = 'Hеобходимо заполнить поля формы!';
+        $message_class = 'warning';
 
     } else {
       include 'db_connect.php';
@@ -19,10 +20,12 @@
 
       if (!$result) {
         $db->close();
-        echo '<p>Непредвиденная ошибка. Код:' . $db->errno . '</p>';
+        $message = 'Непредвиденная ошибка. Код: ' . $db->errno;
+        $message_class = 'error';
 
       } else if (!$result->num_rows) {
-        echo '<p>Не найден пользователь с таким именем</p>';
+        $message = 'Не найден пользователь с таким именем';
+        $message_class = 'error';
 
       } else {
         $row = $result->fetch_assoc();
@@ -36,17 +39,21 @@
           exit;
 
         } else {
-          echo '<p>Не найдено соответствующей пары логин/пароль</p>';
+          $message = 'Не найдено соответствующей пары логин/пароль';
+          $message_class = 'error';
           //$hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
           //echo '<p>' . $hash . '</p>';
         }
       }
     }
   }
-?>
 
-<form action="login.php" method="post">
-  <p>Логин: <input type="text" name="login"></p>
-  <p>Пароль: <input type="password" name="password"></p>
-  <p><input type="submit" value="Войти"></p>
-</form>
+  $section = 'Вход';
+  $user_block = 'tpl_user_block.php';
+  $menu = 'tpl_menu.php';
+  $content = 'tpl_login.php';
+
+  $menu_items = include 'menu_items.php';
+
+  include 'tpl_main.php';
+?>
