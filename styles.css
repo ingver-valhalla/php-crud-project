@@ -217,6 +217,20 @@ body {
   box-shadow: none;
 }
 
+.user-status .login {
+  display: inline-block;
+  margin-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  /*border: 1px solid black;*/
+
+  color: white;
+  text-transform: uppercase;
+  line-height: 18px;
+  font-size: 18px;
+}
+
 .message {
   padding-top: 10px;
   padding-bottom: 10px;

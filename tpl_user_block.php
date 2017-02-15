@@ -2,7 +2,7 @@
   <?php if (session_status() == PHP_SESSION_ACTIVE): ?>
 
   <div class="user-status">
-    <span class="login"><strong><?php echo $_SESSION['login'] ?></strong><span>
+    <span class="login"><strong><?php echo $_SESSION['login'] ?></strong></span>
     <span class="separator">|</span>
     <a href="logout.php">Выйти</a>
   </div>
