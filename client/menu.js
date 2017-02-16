@@ -37,15 +37,24 @@
           .then(response => {
 
             var res = response.body;
-            console.log('Response body:', res);
+            //console.log('Response body:', res);
 
+            app.page = pageName;
             app.messages = res.messages;
             app.content = null;
             if (res.fields && res.fields.length > 0 &&
                 res.rows && res.rows.length > 0) {
               app.content = {
                 fields: res.fields,
-                rows: res.rows
+                rows: res.rows.map(function(row) {
+                    return row.map(function(cell) {
+                      return {
+                        content: cell,
+                        editable: false,
+                        editedText: ''
+                      };
+                    });
+                  })
               };
             }
 

@@ -9,7 +9,14 @@
         <th v-for="field in content.fields">{{ field }}</th>
       </tr>
       <tr v-for="row in content.rows">
-        <td v-for="item in row">{{ item }}</td>
+        <td v-for="(cell, index) in row">
+          <div class="cell-content" v-if="!cell.editable" @click="edit(row, index)">
+            {{ cell.content }}
+          </div>
+          <input type="text" 
+            v-autofocus v-if="cell.editable" v-model="cell.editedText"
+            @keyup.esc="cancelEdit(row, index)" @keyup.enter="endEdit(row, index)" @blur="cancelEdit(row, index)">
+        </td>
       </tr>
     </table>
   </div>

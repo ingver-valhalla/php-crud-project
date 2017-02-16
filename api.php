@@ -65,5 +65,11 @@
             'messages' => $messages));
     }
   } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $messages[] = array(
+      'type' => 'info',
+      'text' => 'Запрос принят');
 
+    echo json_encode(
+      array(
+        'messages' => $messages));
   }
