@@ -1,16 +1,17 @@
 <?php
   include 'auth_check.php';
 
-  include 'db_connect.php';
+  include 'db/connect.php';
   $query = 'SELECT * from providers';
-  include 'db_query_close.php';
+  $result = $db->query($query);
+  $db->close();
 
   $section = 'Поставщики';
-  $user_block = 'tpl_user_block.php';
-  $menu = 'tpl_menu.php';
-  $content = 'tpl_content.php';
+  $user_block = 'templates/user_block.php';
+  $menu = 'templates/menu.php';
+  $content = 'templates/content.php';
   $menu_items = include 'menu_items.php';
   $menu_items['providers']->active = TRUE;
-  $scripts = array('content.js', 'menu.js');
+  $scripts = array('client/content.js', 'client/menu.js');
 
-  include 'tpl_main.php';
+  include 'templates/main.php';

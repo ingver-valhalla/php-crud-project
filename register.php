@@ -19,7 +19,7 @@
       $message_class = 'warning';
 
     } else {
-      include 'db_connect.php';
+      include 'db/connect.php';
 
       $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
       //$hash = $_POST['password'];
@@ -53,12 +53,12 @@
   }
 
   $section = 'Регистрация';
-  $user_block = 'tpl_user_block.php';
-  $menu = 'tpl_menu.php';
-  $content = 'tpl_register.php';
+  $user_block = 'templates/user_block.php';
+  $menu = 'templates/menu.php';
+  $content = 'templates/register.php';
 
   $menu_items = include 'menu_items.php';
   $scripts = array();
 
-  include 'tpl_main.php';
+  include 'templates/main.php';
 ?>

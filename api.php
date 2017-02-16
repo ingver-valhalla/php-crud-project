@@ -26,7 +26,7 @@
 
       } else {
 
-        include 'db_connect.php';
+        include 'db/connect.php';
 
         $query = 'SELECT * from ' . $_GET['page'];
         $result = $db->query($query);

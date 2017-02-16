@@ -13,7 +13,7 @@
         $message_class = 'warning';
 
     } else {
-      include 'db_connect.php';
+      include 'db/connect.php';
 
       $query = "SELECT * from users WHERE login = '" . $_POST['login'] . "'";
       $result = $db->query($query);
@@ -49,12 +49,12 @@
   }
 
   $section = 'Вход';
-  $user_block = 'tpl_user_block.php';
-  $menu = 'tpl_menu.php';
-  $content = 'tpl_login.php';
+  $user_block = 'templates/user_block.php';
+  $menu = 'templates/menu.php';
+  $content = 'templates/login.php';
 
   $menu_items = include 'menu_items.php';
   $scripts = array();
 
-  include 'tpl_main.php';
+  include 'templates/main.php';
 ?>

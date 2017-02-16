@@ -17,8 +17,8 @@
 
     <script src="https://unpkg.com/vue@2.1.10/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/vue.resource/1.2.0/vue-resource.js"></script>
-    <?php include 'tpl_client_content.html' ?>
-    <?php include 'tpl_client_menu.html' ?>
+    <?php include 'client/tpl_content.html' ?>
+    <?php include 'client/tpl_menu.html' ?>
 
     <?php foreach($scripts as $script): ?>
       <script src="<?php echo $script ?>"></script>
