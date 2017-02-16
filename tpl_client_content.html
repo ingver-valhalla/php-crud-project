@@ -1,0 +1,16 @@
+<template id="content-tpl">
+  <div class="content-block">
+    <p v-for="msg in messages" class="message" :class="msg.type">
+      {{ msg.text }}
+    </p>
+
+    <table v-if="content" class="content">
+      <tr>
+        <th v-for="field in content.fields">{{ field }}</th>
+      </tr>
+      <tr v-for="row in content.rows">
+        <td v-for="item in row">{{ item }}</td>
+      </tr>
+    </table>
+  </div>
+</template>

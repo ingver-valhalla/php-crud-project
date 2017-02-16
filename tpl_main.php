@@ -9,11 +9,19 @@
   </head>
   <body>
 
-  <?php
-    include $user_block;
-    include $menu;
-    include $content;
-  ?>
+    <?php
+      include $user_block;
+      include $menu;
+      include $content;
+    ?>
 
+    <script src="https://unpkg.com/vue@2.1.10/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/vue.resource/1.2.0/vue-resource.js"></script>
+    <?php include 'tpl_client_content.html' ?>
+    <?php include 'tpl_client_menu.html' ?>
+
+    <?php foreach($scripts as $script): ?>
+      <script src="<?php echo $script ?>"></script>
+    <?php endforeach; ?>
   </body>
 </html>

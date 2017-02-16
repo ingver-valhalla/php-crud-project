@@ -1,4 +1,4 @@
-<div class="content-block">
+<div class="form-wrapper">
     <?php if (isset($message)): ?>
       <p class="message <?php echo $message_class; ?>"><?php echo $message ?>
     <?php endif; ?>

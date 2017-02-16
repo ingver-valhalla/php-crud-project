@@ -54,6 +54,7 @@
   $content = 'tpl_login.php';
 
   $menu_items = include 'menu_items.php';
+  $scripts = array();
 
   include 'tpl_main.php';
 ?>

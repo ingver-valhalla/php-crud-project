@@ -11,5 +11,6 @@
   $content = 'tpl_content.php';
   $menu_items = include 'menu_items.php';
   $menu_items['providers']->active = TRUE;
+  $scripts = array('content.js', 'menu.js');
 
   include 'tpl_main.php';

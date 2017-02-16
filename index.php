@@ -15,5 +15,6 @@
   $content = 'tpl_index_content.php';
   $menu_items = include 'menu_items.php';
   $menu_items['index']->active = TRUE;
+  $scripts = array('content.js', 'menu.js');
 
   include 'tpl_main.php';

@@ -1,0 +1,11 @@
+<template id="menu-tpl">
+  <div class="menu">
+    <ul>
+      <li v-for="(item, pageName) in items" class="menu-item" :class="{ active: item.active }">
+        <a :href="pageName + '.php'" @click.prevent="getPage(pageName, true)">
+          {{ item.name }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</template>

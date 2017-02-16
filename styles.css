@@ -12,7 +12,7 @@ body {
 
 .content-block {
   padding: 10px;
-  margin-left: 290px;
+  margin-left: 300px;
 }
 
 .content {
@@ -21,7 +21,7 @@ body {
 
   border-width: 0px;
   border-collapse: collapse;
-  box-shadow: 0px 3px 5px 2px #888888;
+  box-shadow: 0px 3px 5px 2px #888;
 
   font-family: 'Rubik', Helvetica, sans-serif;
 }
@@ -54,7 +54,7 @@ body {
 }
 
 .menu {
-  width: 260px;
+  width: 270px;
   height: 100vh;
   padding-top: 10px;
 
@@ -64,8 +64,7 @@ body {
 
 
   background-color: #333;
-  box-shadow: 9px 10px 3px -3px #999999;
-
+  box-shadow: 9px 10px 3px -3px #999;
 }
 
 .menu ul {
@@ -78,9 +77,10 @@ body {
 .menu-item a {
   display: block;
   padding-left: 20px;
+  padding-right: 10px;
   padding-top: 12px;
   padding-bottom: 12px;
-  width: 260px;
+  width: 270px;
 
   outline: 0;
 
@@ -96,11 +96,11 @@ body {
 }
 
 .menu-item a:hover {
-  width: 270px;
+  width: 280px;
 
-  background-color: #F4AB00;
+  background-color: #f4ab00;
   color: #fff;
-  text-shadow: 0px 0px 4px #1B2B38;
+  text-shadow: 0px 0px 4px #1b2b38;
 
   transition: background-color 0.2s;
 }
@@ -120,7 +120,7 @@ body {
 
   position: relative;
   top: 44px;
-  left: 240px;
+  left: 250px;
 
   border-top: 10px solid #111;
   border-left: 0px solid #111;
@@ -132,11 +132,11 @@ body {
 }
 
 .menu-item.active a {
-  width: 270px;
+  width: 280px;
 
-  background-color: #F73D3D;
+  background-color: #f73d3d;
   color: #fff;
-  text-shadow: 0px 0px 4px #1B2B38;
+  text-shadow: 0px 0px 4px #1b2b38;
 }
 
 .menu-item.active a:hover {
@@ -151,7 +151,7 @@ body {
 
   position: relative;
   top: 44px;
-  left: 240px;
+  left: 250px;
 
   border-top: 10px solid #111;
   border-left: 0px solid #111;
@@ -161,13 +161,13 @@ body {
 }
 
 .user-block {
-  margin-left: 290px;
+  margin-left: 300px;
   margin-bottom: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
 
-  box-shadow: 0px 10px 3px -3px #999999;
-  background-color: #4BBC4D;
+  box-shadow: 0px 10px 3px -3px #999;
+  background-color: #4bbc4d;
 }
 
 .user-block::after {
@@ -248,21 +248,19 @@ body {
 }
 
 .message.info {
-  border: 2px solid #8388EA;
-  border-radius: 5px;
-  background-color: #D8DAFF;
+  background-color: #f0f0ff;
 }
 
 .message.warning {
-  border: 2px solid #EACB83;
-  border-radius: 5px;
-  background-color: #FFFBB2;
+  background-color: #fffddb;
 }
 
 .message.error {
-  border: 2px solid #EA8383;
-  border-radius: 5px;
-  background-color: #FFCECE;
+  background-color: #fcc;
+}
+
+.form-wrapper {
+  margin-left: 300px;
 }
 
 .auth-form {
@@ -270,8 +268,8 @@ body {
   padding: 20px;
   width: 300px;
 
-  border: 1px solid #ccc;
-  box-shadow: 0px 3px 2px #888888;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0px 3px 2px #888;
 
   text-transform: uppercase;
   font-size: 14px;
