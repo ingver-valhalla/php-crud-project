@@ -12,10 +12,11 @@ var app = new Vue({
         return;
       }
       row[index].editable = true;
-      row[index].editedText = row[index].content;
+      if (row[index].editedText === '') {
+        row[index].editedText = row[index].content;
+      }
     },
     cancelEdit: function(row, index) {
-      row[index].editedText = '';
       row[index].editable = false;
     },
     endEdit: function(row, index) {
@@ -27,24 +28,30 @@ var app = new Vue({
       }
 
       Vue.http.post('api.php', {
-        params: {
+          type: 'update',
           page: app.page,
-          id: row[0],
-          fieldName: this.content.fields[index],
-          newValue: row[index].editedText
-        }
+          id: row[0].content,
+          field_name: this.content.fields[index],
+          new_value: row[index].editedText
       }).then(function(response) {
-        //row[index].content = row[index].editedText;
-        //row[index].editedText = '';
         var res = response.body;
-        console.log("Response body:", res);
-        console.log(res.messages);
+        //console.log("Response body:", res);
+
         if (res.messages) {
           app.messages = res.messages;
+        }
+        if (res.success) {
+          row[index].content = res.changed_value;
+          row[index].editedText = '';
+        } else {
+          console.error('Request denied');
         }
       }, function(error) {
         console.error("Error:", error);
       });
+    },
+    remove: function() {
+      console.log('Deleting row');
     }
   },
   directives: {

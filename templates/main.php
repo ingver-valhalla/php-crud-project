@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $section ?> | Предприятие</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="client/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto|Rubik" rel="stylesheet">
   </head>
   <body>
