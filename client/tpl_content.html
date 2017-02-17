@@ -5,16 +5,17 @@
     </p>
 
     <table v-if="content" class="content">
-      <tr>
-        <th v-for="field in content.fields">{{ field }}</th>
+      <tr class="table-row">
+        <th v-for="field in content.fields" class="table-header">{{ field }}</th>
       </tr>
-      <tr v-for="row in content.rows">
-        <td v-for="(cell, index) in row" @click="edit(row, index)">
+      <tr v-for="row in content.rows" class="table-row">
+        <td v-for="(cell, index) in row" @click="edit(row, index)" class="table-cell">
           <span v-if="!cell.editable" class="cell-text">{{ cell.content }}</span>
           <input type="text"
             v-autofocus v-if="cell.editable" v-model="cell.editedText"
             @keyup.esc="cancelEdit(row, index)" @keyup.enter="endEdit(row, index)" @blur="cancelEdit(row, index)">
         </td>
+        <td @click="remove" class="delete"></td>
       </tr>
     </table>
   </div>

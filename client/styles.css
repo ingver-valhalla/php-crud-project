@@ -16,6 +16,7 @@ body {
 }
 
 .content {
+  display: table;
   margin: 0 auto;
 
   border-width: 0px;
@@ -26,24 +27,32 @@ body {
   font-size: 16px;
 }
 
-.content th {
+.content .table-header {
+  display: table-cell;
   padding: 10px;
 
   background-color: #2589bd;
 
   text-transform: uppercase;
   color: #fff;
+  text-align: center;
 }
 
-.content tr:nth-child(odd) {
+.content .table-row {
+  display: table-row;
+  position: relative;
+}
+
+.content .table-row:nth-child(odd) {
   background-color: #eee;
 }
 
-.content tr:nth-child(even) {
+.content .table-row:nth-child(even) {
   background-color: #fff;
 }
 
-.content td {
+.content .table-cell {
+  display: table-cell;
   height: 40px;
   width: 150px;
   max-width: 150px;
@@ -56,7 +65,7 @@ body {
   word-wrap: break-word;
 }
 
-.content td:first-child {
+.content .table-cell:first-child {
   width: auto;
 
   text-align: center;
@@ -76,6 +85,48 @@ body {
   font-size: 16px;
   line-height: 16px;
   text-align: center;
+}
+
+.content .delete {
+  display: none;
+}
+
+.content .table-row:hover .delete {
+  display: block;
+  width: 40px;
+  height: 40px;
+
+  position: absolute;
+}
+
+.content .table-row:hover .delete::before {
+  content: "";
+  display: block;
+  height: 26px;
+
+  position: absolute;
+  top: 7px;
+  left: 18px;
+
+  border-left: 5px solid #e05b52;
+  box-shadow: 0px 0px 3px #e05b52;
+
+  transform: rotate(45deg);
+}
+
+.content .table-row:hover .delete::after {
+  content: "";
+  display: block;
+  height: 26px;
+
+  position: absolute;
+  top: 7px;
+  left: 18px;
+
+  border-left: 5px solid #e05b52;
+  box-shadow: 0px 0px 3px #e05b52;
+
+  transform: rotate(-45deg);
 }
 
 .menu {
