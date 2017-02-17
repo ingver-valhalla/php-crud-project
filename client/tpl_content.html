@@ -8,14 +8,14 @@
       <tr class="table-row">
         <th v-for="field in content.fields" class="table-header">{{ field }}</th>
       </tr>
-      <tr v-for="row in content.rows" class="table-row">
-        <td v-for="(cell, index) in row" @click="edit(row, index)" class="table-cell">
+      <tr v-for="(row, rowIndex) in content.rows" class="table-row">
+        <td v-for="(cell, cellIndex) in row" @click="edit(row, cellIndex)" class="table-cell">
           <span v-if="!cell.editable" class="cell-text">{{ cell.content }}</span>
           <input type="text"
             v-autofocus v-if="cell.editable" v-model="cell.editedText"
-            @keyup.esc="cancelEdit(row, index)" @keyup.enter="endEdit(row, index)" @blur="cancelEdit(row, index)">
+            @keyup.esc="cancelEdit(row, cellIndex)" @keyup.enter="endEdit(row, cellIndex)" @blur="cancelEdit(row, cellIndex)">
         </td>
-        <td @click="remove" class="delete"></td>
+        <td @click="remove(rowIndex)" class="delete"></td>
       </tr>
     </table>
   </div>

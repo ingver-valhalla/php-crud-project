@@ -50,8 +50,32 @@ var app = new Vue({
         console.error("Error:", error);
       });
     },
-    remove: function() {
-      console.log('Deleting row');
+    remove: function(rowIndex) {
+      console.log('Removing row', rowIndex);
+      if (arguments.length < 1) {
+        return;
+      }
+
+      Vue.http.post('api.php', {
+        type: 'delete',
+        page: app.page,
+        id: app.content.rows[rowIndex][0].content,
+        field_name: '',
+        new_value: ''
+      }).then(function(response) {
+        var res = response.body;
+
+        console.log('Response body', res);
+
+        if (res.messages) {
+          app.messages = res.messages;
+        }
+        if (res.success) {
+          app.content.rows.splice(rowIndex, 1);
+        }
+      }, function(error) {
+        console.error('Request error');
+      });
     }
   },
   directives: {

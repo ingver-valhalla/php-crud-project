@@ -130,7 +130,31 @@
           }
 
 
+
         } else if ($req->type == 'delete') {
+          $page = $db->real_escape_string($req->page);
+          $id = $db->real_escape_string($req->id);
+
+          $query = "DELETE from $page WHERE id = $id";
+          if (!$db->query($query)) {
+            $messages[] = array(
+              'type' => 'error',
+              'text' => 'Не удалось удалить строку из таблицы');
+
+            if ($db->errno == 1452) { // foreign key constraint
+              $messages[] = array(
+                'type' => 'error',
+                'text' => 'Операция невозможна из-за нарушения ограничения внешнего ключа');
+            }
+
+            $messages[] = array(
+              'type' => 'error',
+              'text' => 'Код ошибки: ' . $db->errno . ' :: ' . $db->error);
+
+          } else {
+            $success = TRUE;
+          }
+
 
 
         } else {
