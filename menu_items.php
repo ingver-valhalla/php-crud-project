@@ -5,4 +5,5 @@
     'projects' => ((object) ['link' => 'projects.php', 'name' => 'Проекты', 'active' => FALSE]),
     'providers' => ((object) ['link' => 'providers.php', 'name' => 'Поставщики', 'active' => FALSE]),
     'cities' => ((object) ['link' => 'cities.php', 'name' => 'Города', 'active' => FALSE]),
+    //'delivery' => ((object) ['link' => 'delivery.php', 'name' => 'Поставки', 'active' => FALSE])
   ];

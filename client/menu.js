@@ -4,16 +4,10 @@
     template: '#menu-tpl',
 
     data: {
-      items: {
-        index: { active: false, name: 'Главная страница' },
-        parts: { active: false, name: 'Детали'},
-        projects: { active: false, name: 'Проекты'},
-        providers: { active: false, name: 'Поставщики'},
-        cities: { active: false, name: 'Города'},
-      }
+      items: {}
     },
     methods: {
-      getPage: function(pageName, push) {
+      getPage: function(pageName, pushToHistory) {
         var items = this.items;
         var keys = Object.keys(items);
         var prevActive = null;
@@ -26,13 +20,14 @@
         }
 
         if (prevActive) {
-          console.log(prevActive);
           if (prevActive === pageName) {
             return;
           } else {
             items[prevActive].active = false;
           }
         }
+
+
         Vue.http.get('api.php', { params: { page: pageName }})
           .then(response => {
 
@@ -60,7 +55,7 @@
 
 
             items[pageName].active = true;
-            if (push) {
+            if (pushToHistory) {
               window.history.pushState({ pageName: pageName }, '', pageName + '.php');
             }
           }, error => {
@@ -74,10 +69,15 @@
       var items = document.querySelectorAll('.menu-item');
 
       for (var i = 0; i < items.length; ++i) {
+        var pageName = items[i].dataset.name;
         if (items[i].classList.contains('active')) {
-          activePage = items[i].dataset.name;
-          break;
+          activePage = pageName;
         }
+
+        Vue.set(this.items, pageName, {
+          active: false,
+          name: items[i].querySelector('a').innerHTML.trim()
+        });
       }
 
       if (activePage) {
@@ -87,7 +87,7 @@
   });
 
   window.onpopstate = function(e) {
-    console.log(e.state, e.url);
+    //console.log(e.state, e.url);
     if (e.state && e.state.pageName) {
       menu.getPage(e.state.pageName);
     } else {

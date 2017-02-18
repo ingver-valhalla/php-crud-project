@@ -11,20 +11,20 @@
     <table class="content">
       <?php $fields = $result->fetch_fields(); ?>
 
-      <tr>
+      <tr class="table-row">
         <?php foreach($fields as $field): ?>
 
-        <th><?php echo($field->name) ?>
+        <th class="table-header"><?php echo($field->name) ?>
 
         <?php endforeach; ?>
       </tr>
 
       <?php while($row = $result->fetch_assoc()): ?>
 
-      <tr>
+      <tr class="table-row">
         <?php foreach($row as $field => $value): ?>
 
-        <td><?php echo($row[$field]) ?></td>
+        <td class="table-cell"><?php echo($row[$field]) ?></td>
 
         <?php endforeach; ?>
       </tr>
