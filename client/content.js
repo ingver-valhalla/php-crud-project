@@ -5,10 +5,73 @@ var app = new Vue({
   data: {
     page: 'index',
     content: null,
-    messages: []
+    messages: [],
+    addingRow: false,
+    addedRow: []
   },
 
   methods: {
+    addRow: function() {
+      if (this.content) {
+        this.addingRow = true;
+      }
+    },
+
+    cancelAddRow: function() {
+      this.addingRow = false;
+    },
+
+    endAddRow: function() {
+      //console.log(this.addedRow);
+      this.addingRow = false;
+
+      Vue.http.post('api.php', {
+        type: 'insert',
+        page: app.page,
+        values: app.addedRow,
+        fields: app.content.fields.slice(1, Infinity)
+      }).then(function(response) {
+        var res = response.body;
+        //console.log("Response body:", res);
+
+        if (res.messages) {
+          app.messages = res.messages;
+        }
+
+        if (res.success) {
+
+          getServerPage(app.page, function(res) {
+            if (res.fields && res.fields.length > 0 &&
+                res.rows && res.rows.length > 0) {
+              app.content = {
+                fields: res.fields,
+                rows: res.rows.map(function(row) {
+                    return row.map(function(cell) {
+                      return {
+                        content: cell,
+                        editable: false,
+                        editedText: ''
+                      };
+                    });
+                  })
+              };
+              app.addedRow = [];
+              for (var i = 0; i < res.fields.length - 1; ++i) {
+                app.addedRow.push('');
+              }
+            }
+          }, function(err) {
+            console.error('Error:', err);
+          });
+
+        } else {
+          console.error('Request denied');
+        }
+      }, function(error) {
+        console.error(error);
+      });
+    },
+
     edit: function(row, index) {
       if (arguments.length < 2 || index === 0) {
         return;
@@ -67,8 +130,6 @@ var app = new Vue({
         type: 'delete',
         page: app.page,
         id: app.content.rows[rowIndex][0].content,
-        field_name: '',
-        new_value: ''
       }).then(function(response) {
         var res = response.body;
 
@@ -95,3 +156,7 @@ var app = new Vue({
   }
 });
 
+function getServerPage(pageName, success, fail) {
+  Vue.http.get('api.php', { params: { page: pageName }})
+    .then(response => success(response.body), fail);
+}

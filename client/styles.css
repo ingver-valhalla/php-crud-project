@@ -51,6 +51,27 @@ body {
   background-color: #fff;
 }
 
+.content .table-row:nth-child(odd) .table-cell:hover {
+  background-color: #e5e5e5;
+
+  cursor: pointer;
+}
+
+.content .table-row:nth-child(even) .table-cell:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.content .table-row:nth-child(odd) .table-cell:first-child{
+  background-color: #eee;
+  cursor: default;
+}
+
+.content .table-row:nth-child(even) .table-cell:first-child {
+  background-color: #fff;
+  cursor: default;
+}
+
 .content .table-cell {
   display: table-cell;
   height: 40px;
@@ -88,19 +109,29 @@ body {
   text-align: center;
 }
 
-.content .delete {
+.delete {
   display: none;
 }
 
-.content .table-row:hover .delete {
+.table-row:hover .delete {
   display: block;
   width: 40px;
   height: 40px;
 
   position: absolute;
+
+  opacity: 0.6;
+
+  transition: opacity 0.3s;
 }
 
-.content .table-row:hover .delete::before {
+.table-row:hover .delete:hover {
+  opacity: 1;
+
+  transition: opacity 0.3s;
+}
+
+.table-row:hover .delete::before {
   content: "";
   display: block;
   height: 26px;
@@ -115,7 +146,7 @@ body {
   transform: rotate(45deg);
 }
 
-.content .table-row:hover .delete::after {
+.table-row:hover .delete::after {
   content: "";
   display: block;
   height: 26px;
@@ -128,6 +159,64 @@ body {
   box-shadow: 0px 0px 3px #e05b52;
 
   transform: rotate(-45deg);
+}
+
+.add-btn {
+  display: block;
+  width: 60px;
+  height: 60px;
+
+  position: fixed;
+  left: 105px;
+  bottom: 35px;
+  z-index: 1000;
+
+  /*border: 1px dotted black;*/
+  border-radius: 50%;
+  background-color: #4bbc4d;
+  box-shadow: 0px 0px 5px 2px #4bbc4d;
+
+  opacity: 0.6;
+
+  transition: opacity 0.3s,
+              box-shadow 0.3s;
+}
+
+.add-btn:hover {
+  box-shadow: 0px 0px 5px 4px #4bbc4d;
+  opacity: 1;
+
+  transition: opacity 0.3s,
+              box-shadow 0.3s;
+}
+
+.add-btn span {
+  position: relative;
+}
+
+.add-btn span::before {
+  content: "";
+  display: block;
+  height: 32px;
+
+  position: absolute;
+  top: 14px;
+  left: 26px;
+
+  border-left: 8px solid #333;
+}
+
+.add-btn span::after {
+  content: "";
+  display: block;
+  height: 32px;
+
+  position: absolute;
+  top: 14px;
+  left: 26px;
+
+  border-left: 8px solid #333;
+  transform: rotate(90deg);
 }
 
 .menu {
@@ -366,6 +455,7 @@ body {
 
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 16px;
+  text-align: center;
 
   transition: box-shadow 0.3s,
               background-color 0.3s;

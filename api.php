@@ -74,6 +74,20 @@
     $success = FALSE;
     $changed_value = NULL;
 
+    $wrong_table_error = array(
+      'type' => 'error',
+      'text' => 'Ошибка запроса: обращение к несуществующей таблице');
+    $missing_params_error = array(
+      'type' => 'error',
+      'text' => 'Ошибка запроса: указаны не все параметры');
+    $fkey_constraint_error = array(
+      'type' => 'error',
+      'text' => 'Операция невозможна из-за нарушения ограничения внешнего ключа');
+    $operation_fail_error = array(
+      'type' => 'error',
+      'text' => 'Не удалось выполнить операцию');
+
+
     include 'db/connect.php';
 
     if (!isset($_SESSION)) {
@@ -84,36 +98,44 @@
     } else {
       $req = json_decode(file_get_contents('php://input'));
 
-      if ($req && isset($req->type) &&
-          isset($req->page) && key_exists($req->page, include 'menu_items.php') &&
-          isset($req->field_name) && isset($req->new_value) && isset($req->id)) {
+      if (!$req) {
+        $messages[] = array(
+          'type' => 'error',
+          'text' => 'Запрос сформирован некорректно');
+      } else if (!isset($req->type)) {
+        $messages[] = array(
+          'type' => 'error',
+          'text' => 'Ошибка запроса: не указан тип операции');
 
-        if ($req->type == 'update') {
+
+
+      } else if ($req->type == 'update') {
+        if (!isset($req->page) || !isset($req->field_name) ||
+            !isset($req->new_value) || !isset($req->id)) {
+          $messages[] = $missing_params_error;
+
+        } else if (!key_exists($req->page, include 'menu_items.php')) {
+          $messages[] = $wrong_table_error ;
+
+        } else {
           $page = $db->real_escape_string($req->page);
           $id = $db->real_escape_string($req->id);
           $field = $db->real_escape_string($req->field_name);
           $new_value = $db->real_escape_string($req->new_value);
 
-          //$messages[] = array(
-            //'type' => 'info',
-            //'text' => '' . $page . ' ' . $id . ' '. $field . ' ' . $new_value);
-
           $query = "UPDATE $page SET $field = '$new_value' WHERE id = $id";
           if (!$db->query($query)) {
 
-            $messages[] = array(
-              'type' => 'error',
-              'text' => 'Не удалось обновить запись в таблице');
+            $messages[] = $operation_fail_error;
 
             if ($db->errno == 1452) { // foreign key constraint
-              $messages[] = array(
-                'type' => 'error',
-                'text' => 'Операция невозможна из-за нарушения ограничения внешнего ключа');
+              $messages[] = $fkey_constraint_error;
             }
 
             $messages[] = array(
               'type' => 'error',
               'text' => 'Код ошибки: ' . $db->errno . ' :: ' . $db->error);
+
 
           } else {
             $query = "SELECT $field from $page WHERE id = $id";
@@ -128,23 +150,27 @@
                 'text' => 'Неизвестная ошибка');
             }
           }
+        }
 
 
 
-        } else if ($req->type == 'delete') {
+      } else if ($req->type == 'delete') {
+        if (!isset($req->page) || !isset($req->id)) {
+          $messages[] = $missing_params_error;
+
+        } else if (!key_exists($req->page, include 'menu_items.php')) {
+          $messages[] = $wrong_table_error ;
+
+        } else {
           $page = $db->real_escape_string($req->page);
           $id = $db->real_escape_string($req->id);
 
           $query = "DELETE from $page WHERE id = $id";
           if (!$db->query($query)) {
-            $messages[] = array(
-              'type' => 'error',
-              'text' => 'Не удалось удалить строку из таблицы');
+            $messages[] = $operation_fail_error;
 
             if ($db->errno == 1452) { // foreign key constraint
-              $messages[] = array(
-                'type' => 'error',
-                'text' => 'Операция невозможна из-за нарушения ограничения внешнего ключа');
+              $messages[] = $fkey_constraint_error;
             }
 
             $messages[] = array(
@@ -154,18 +180,41 @@
           } else {
             $success = TRUE;
           }
+        }
 
 
+
+      } else if ($req->type == 'insert') {
+        if (!isset($req->page) || !isset($req->values) || !isset($req->fields)) {
+          $messages[] = $missing_params_error;
+
+        } else if (!key_exists($req->page, include 'menu_items.php')) {
+          $messages[] = $wrong_table_error;
 
         } else {
-          $messages[] = array(
-            'type' => 'error',
-            'text' => 'Ошибка запроса: неизвестная операция');
+          $page = $req->page;
+          $fields = join(",", $req->fields);
+          $values = "'" . join("','", $req->values) . "'";
+
+          $query = "INSERT INTO $page ($fields) VALUES ($values)";
+
+          if (!$db->query($query)) {
+            $messages[] = $operation_fail_error;
+
+            $messages[] = array(
+              'type' => 'error',
+              'text' => 'Код ошибки: ' . $db->errno . ' :: ' . $db->error);
+          } else {
+            $success = TRUE;
+          }
         }
+
+
+
       } else {
         $messages[] = array(
           'type' => 'error',
-          'text' => 'Запрос сформирован некорректно');
+          'text' => 'Ошибка запроса: неизвестная операция');
       }
     }
 

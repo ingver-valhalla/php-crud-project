@@ -17,6 +17,15 @@
         </td>
         <td @click="remove(rowIndex)" class="delete"></td>
       </tr>
+      <tr v-if="addingRow" class="table-row">
+        <td class="table-cell"></td>
+        <td v-for="(cell, cellIndex) in addedRow" class="table-cell">
+          <input type="text" v-autofocus v-model="addedRow[cellIndex]"
+            @keyup.esc="cancelAddRow" @keyup.enter="endAddRow">
+        </td>
+        <td @click="cancelAddRow" class="delete"></td>
+      </tr>
     </table>
+    <div @click="addRow" class="add-btn"><span></span></div>
   </div>
 </template>
